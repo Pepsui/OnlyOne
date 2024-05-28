@@ -1,0 +1,95 @@
+[gd_scene load_steps=12 format=3 uid="uid://dgjabswv4g04v"]
+
+[ext_resource type="Texture2D" uid="uid://xl5yecr4a02v" path="res://assets/lever_animation.png" id="1_dvp8b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k50ry"]
+size = Vector2(13, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq4pd"]
+atlas = ExtResource("1_dvp8b")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nv812"]
+atlas = ExtResource("1_dvp8b")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jblti"]
+atlas = ExtResource("1_dvp8b")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3nae"]
+atlas = ExtResource("1_dvp8b")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qip8l"]
+atlas = ExtResource("1_dvp8b")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brkbu"]
+atlas = ExtResource("1_dvp8b")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewihp"]
+atlas = ExtResource("1_dvp8b")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppoby"]
+atlas = ExtResource("1_dvp8b")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cv4bt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq4pd")
+}],
+"loop": true,
+"name": &"default-off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nv812")
+}],
+"loop": true,
+"name": &"default-on",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jblti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3nae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qip8l")
+}],
+"loop": true,
+"name": &"of",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brkbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewihp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppoby")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[node name="Lever" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 6.5)
+shape = SubResource("RectangleShape2D_k50ry")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cv4bt")
+animation = &"default-off"
