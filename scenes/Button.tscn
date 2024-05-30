@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://f374wqfimt4g"]
+
+[ext_resource type="Texture2D" uid="uid://cdo03bgdxsd47" path="res://assets/Button.png" id="1_iiwky"]
+
+[node name="Area2D" type="Area2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-4, 8, -4, 7, -3, 7, -3, 6, -2, 6, -2, 5, 2, 5, 2, 6, 3, 6, 3, 7, 4, 7, 4, 8)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_iiwky")

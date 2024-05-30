@@ -1,6 +1,5 @@
-extends Area2D
+extends Node2D
 
-var open: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,7 +10,9 @@ func _ready():
 func _process(delta):
 	pass
 
-func _on_lever_open_object():
-	print("I got the lever signal!")
-	open = true
-	print(open)
+
+func _on_door_body_entered(body, open):
+	print("A body has entered the door, will now check what it is")
+	print(body.name)
+	if (body.name == "Character" && open == true):
+		print("You won!")

@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dx481e3uhm056"]
+[gd_scene load_steps=9 format=3 uid="uid://dx481e3uhm056"]
 
 [ext_resource type="PackedScene" uid="uid://bhuskr7w8fwoh" path="res://scenes/character.tscn" id="1_fg1ss"]
+[ext_resource type="Script" path="res://scripts/level_1.gd" id="1_jl6ea"]
 [ext_resource type="Texture2D" uid="uid://bjvbcibvdlj62" path="res://assets/tilemap_placeholder.png" id="2_2egyy"]
 [ext_resource type="PackedScene" uid="uid://bqfd2k3vpeuso" path="res://scenes/lever.tscn" id="3_onw0v"]
+[ext_resource type="PackedScene" uid="uid://cbk7l0dax3jv7" path="res://scenes/door.tscn" id="5_m1l8f"]
+[ext_resource type="PackedScene" uid="uid://cp0c8rmtl2nn" path="res://scenes/Spike.tscn" id="6_gsa4n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4682l"]
 texture = ExtResource("2_2egyy")
@@ -513,18 +516,32 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_4682l")
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_jl6ea")
 
 [node name="Character" parent="." instance=ExtResource("1_fg1ss")]
-position = Vector2(7, 17)
+z_index = 5
+position = Vector2(25, 16)
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
-position = Vector2(-7, -17)
+position = Vector2(-25, -16)
 zoom = Vector2(2.5, 2.5)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_chi53")
 format = 2
-layer_0/tile_data = PackedInt32Array(524279, 196608, 4, 524280, 196608, 4, 524281, 196608, 4, 524282, 196608, 4, 524283, 196608, 4, 524284, 196608, 4, 524285, 196608, 4, 524286, 196608, 4, 524287, 196608, 4, 458752, 196608, 4, 458753, 196608, 4, 458754, 196608, 4, 458755, 196608, 4, 458756, 196608, 4, 458757, 196608, 4, 393221, 196608, 4, 393222, 196608, 4, 393223, 196608, 4, 393224, 196608, 4, 393225, 196608, 4, 393226, 196608, 4, 393227, 196608, 4, 393228, 196608, 4, 458764, 196608, 4, 458765, 196608, 4, 458766, 196608, 4, 458767, 196608, 4, 524303, 196608, 4, 524304, 196608, 4, 524305, 196608, 4, 524306, 196608, 4, 524307, 196608, 4, 524308, 196608, 4, 524309, 196608, 4, 524310, 196608, 4, 524311, 196608, 4, 524312, 196608, 4, 524313, 196608, 4, 524314, 196608, 4, 524315, 196608, 4, 524316, 196608, 4)
+layer_0/tile_data = PackedInt32Array(131072, 196608, 4, 131073, 196608, 4, 131074, 196608, 4, 196611, 196608, 4, 262148, 196608, 4, 327685, 196608, 4, 393222, 196608, 4, 393223, 196608, 4, 393224, 196608, 4, 393225, 196608, 4, 393226, 196608, 4, 393227, 196608, 4, 393228, 196608, 4)
 
 [node name="Lever" parent="." instance=ExtResource("3_onw0v")]
-position = Vector2(117, 86)
+position = Vector2(118, 88)
+
+[node name="Door" parent="." instance=ExtResource("5_m1l8f")]
+position = Vector2(201, 88)
+
+[node name="Spike" parent="." instance=ExtResource("6_gsa4n")]
+z_index = -1
+position = Vector2(143, 99)
+
+[connection signal="body_entered" from="Lever" to="Character" method="_on_lever_body_entered"]
+[connection signal="open_object" from="Lever" to="Door" method="_on_lever_open_object"]
+[connection signal="body_entered" from="Door" to="." method="_on_door_body_entered" binds= [true]]
+[connection signal="body_entered" from="Spike" to="Spike" method="_on_body_entered"]
