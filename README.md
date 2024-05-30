@@ -7,3 +7,5 @@ Start on data structure with taking in movement and replaying it back from an ar
 ## Main loop implementation
 
 Was thinking of having an array of movement data, with input button and length of timing being in each element of the array. Then we would have an entity that would take in that array, and with the same body as the character, just read through the array and do the same movements and what was in the array
+
+NEED TO GET STARTED ON TRYING TO FIGURE OUT PROPER LEVEL DESIGNS!!! (And maybe sound too, though that might not be something I get to)
