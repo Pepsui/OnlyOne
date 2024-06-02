@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhuskr7w8fwoh"]
+[gd_scene load_steps=8 format=3 uid="uid://ba3tjarscbu2n"]
 
-[ext_resource type="Script" path="res://scripts/character.gd" id="1_r6dmr"]
-[ext_resource type="Texture2D" uid="uid://crvn8hb8d87lw" path="res://assets/OnlyOneMC_with_walk.png" id="2_n5lu5"]
+[ext_resource type="Script" path="res://scripts/Player_Entity.gd" id="1_5e54h"]
+[ext_resource type="Texture2D" uid="uid://crvn8hb8d87lw" path="res://assets/OnlyOneMC_with_walk.png" id="2_uijx8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7tor"]
 size = Vector2(10, 15)
@@ -64,7 +64,7 @@ _data = {
 }
 
 [node name="Character" type="CharacterBody2D"]
-script = ExtResource("1_r6dmr")
+script = ExtResource("1_5e54h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 0.5)
@@ -77,6 +77,6 @@ libraries = {
 speed_scale = 0.35
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_n5lu5")
+texture = ExtResource("2_uijx8")
 hframes = 9
 frame = 8

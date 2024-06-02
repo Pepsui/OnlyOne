@@ -1,12 +1,10 @@
 extends CharacterBody2D
 
 signal movementDirection
-signal run_clone_moves
 
 @export var run_speed = 150
 @export var jump_velocity = -400.0
-var velocity_changer = 40000
-
+var previous_moves: Array[String] 
 enum {IDLE, RUN, JUMP, HURT, DEAD}
 
 var state = IDLE
@@ -22,6 +20,7 @@ func change_state(new_state):
 			$AnimationPlayer.play("idle")
 		RUN:
 			$AnimationPlayer.play("run")
+			print("run anim")
 		DEAD:
 			hide()
 
@@ -31,34 +30,24 @@ func _ready():
 
 
 func move_right():
-	velocity.x += run_speed
+	velocity.x = run_speed
 	$Sprite2D.flip_h = false 
-	movementDirection.emit("right")
 
 
 func move_left():
-	velocity.x -= run_speed
+	velocity.x = -run_speed
 	$Sprite2D.flip_h = true 
-	movementDirection.emit("left")
 
-func get_input():
-	var right = Input.is_action_pressed("right")
-	var left = Input.is_action_pressed("left")
-	var jump = Input.is_action_pressed("jump")
-	
-	if state == HURT:
-		return
-	velocity.x = 0
-	if right:
+
+func run_input(direction):
+	if direction == "right":
 		move_right()
-	if left:
+	if direction == "left":
 		move_left()
-	if Input.is_anything_pressed() == false:
+	if direction == "stop":
 		velocity.x = 0
-		movementDirection.emit("stop")
-	if jump and is_on_floor():
+	if direction == "jump":
 		velocity.y = jump_velocity
-		movementDirection.emit("jump")
 	if state == IDLE and velocity.x != 0:
 		change_state(RUN)
 	if state == RUN and velocity.x == 0:
@@ -66,6 +55,23 @@ func get_input():
 
 
 func _physics_process(delta):
+	var current_move: int = 0
 	velocity.y += gravity * delta
-	get_input()
 	move_and_slide()
+	
+	
+
+
+func play_input(moves):
+	var current_move: int = 0
+	while current_move < moves.size() - 1:
+		run_input(moves[current_move])
+		current_move += 1
+
+func _on_character_movement_direction(direction):
+	previous_moves.append(direction)
+	run_input(direction)
+
+#
+#func _on_character_run_clone_moves():
+	#play_input(previous_moves) 

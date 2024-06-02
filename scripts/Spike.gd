@@ -13,4 +13,5 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if (body.name == "Character"):
-		body.kill()
+		body.hide()
+		print("You died!")
